@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Anna Flavia Lippi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gloria+Hallelujah&family=Titan+One&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #f0e6d2;
+            --paper-color: #ffffff;
+            --pink-primary: #ff8cb8;
+            --pink-dark: #d65a8d;
+            --text-main: #2c2c2c;
+            --text-light: #666;
+            --tab-inactive: #e8e0d5;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23dcb' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            /* Permite scroll no body no mobile */
+            padding: 20px 10px; 
+            display: block; /* Mudado de flex para block para facilitar scroll mobile */
+        }
+
+        /* --- Container Principal --- */
+        .folder-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto 0 auto; /* Centraliza horizontalmente */
+            position: relative;
+        }
+
+        /* --- Navegação de Abas (Responsiva) --- */
+        .tabs-nav {
+            display: flex;
+            gap: 5px;
+            padding-left: 10px;
+            position: relative;
+            z-index: 2;
+            top: 2px;
+            /* Habilita scroll horizontal no mobile */
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+            padding-bottom: 5px; /* Espaço para não cortar sombra */
+        }
+        
+        /* Esconder a barra de rolagem visualmente mas manter funcional */
+        .tabs-nav::-webkit-scrollbar { height: 4px; }
+        .tabs-nav::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+        .tab-btn {
+            background: var(--tab-inactive);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 15px 15px 0 0;
+            font-family: 'Titan One', cursive;
+            color: var(--text-light);
+            font-size: 0.9rem; /* Levemente menor */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex-shrink: 0; /* Impede que o botão encolha */
+        }
+
+        .tab-btn.active {
+            background: var(--paper-color);
+            color: var(--pink-primary);
+            padding-bottom: 15px;
+            transform: translateY(0);
+        }
+
+        /* --- Área de Conteúdo (Papel) --- */
+        .content-area {
+            background: var(--paper-color);
+            border-radius: 20px;
+            border-top-left-radius: 0;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 500px;
+            background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
+            background-size: 100% 2rem;
+            z-index: 1;
+        }
+
+        .tape-deco {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            width: 100px;
+            height: 30px;
+            background-color: rgba(255, 230, 240, 0.7);
+            transform: rotate(3deg);
+            border: 1px dashed rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Tipografia Responsiva --- */
+        h1.page-title {
+            font-family: 'Titan One', cursive;
+            font-size: 3.5rem;
+            color: var(--pink-primary);
+            line-height: 1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            word-wrap: break-word; /* Evita estourar a tela */
+        }
+
+        h2.section-title {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            display: inline-block;
+            border-bottom: 3px solid var(--pink-primary);
+            transform: rotate(-1deg);
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 2rem;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        /* --- Layout Grids --- */
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .profile-frame {
+            background: white;
+            padding: 10px;
+            padding-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+            max-width: 100%;
+        }
+        
+        .profile-frame img { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 4px; 
+        }
+
+        /* --- Skills e Tags --- */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .sticker {
+            background: var(--pink-primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(var(--r));
+            display: inline-block;
+            border: 2px solid white;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- Timeline --- */
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 15px;
+            border-left: 3px dashed var(--pink-primary);
+        }
+        .timeline-title { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
+        .timeline-subtitle { font-family: 'Gloria Hallelujah', cursive; color: var(--pink-dark); display: block; margin-bottom: 4px; }
+        .tag { background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; color: #555; display: inline-block; margin-bottom: 5px; }
+
+        /* --- Contato --- */
+        .contact-box {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 20px;
+            border: 2px dashed var(--pink-primary);
+        }
+        .btn-contact {
+            display: flex; /* Melhor alinhamento no mobile */
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: var(--text-main);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px 0;
+            width: 100%; /* Botão largura total no mobile */
+            max-width: 300px; /* Limite no desktop */
+        }
+
+        /* =========================================
+           MEDIA QUERIES (A MÁGICA DO MOBILE)
+           ========================================= */
+        @media (max-width: 768px) {
+            
+            body {
+                padding: 10px;
+            }
+
+            .content-area {
+                padding: 25px 20px; /* Menos padding interno */
+                min-height: auto;
+            }
+
+            /* Stackar a Home (Foto em cima, texto embaixo) */
+            .home-grid {
+                grid-template-columns: 1fr; /* Uma coluna só */
+                gap: 30px;
+                text-align: center;
+            }
+
+            /* Arrumar a foto */
+            .profile-frame {
+                margin: 0 auto; /* Centraliza a foto */
+                max-width: 250px; /* Limita o tamanho da foto no celular */
+                transform: rotate(-2deg);
+            }
+
+            /* Texto Gigante */
+            h1.page-title {
+                font-size: 2.8rem; /* Diminui um pouco */
+                margin-top: 10px;
+            }
+
+            /* Ajuste na timeline de educação */
+            .home-grid div {
+                width: 100%;
+            }
+
+            /* Fita adesiva */
+            .tape-deco {
+                right: 10px;
+                width: 80px;
+                height: 25px;
+            }
+
+            /* Contato */
+            .contact-box {
+                padding: 20px 15px;
+            }
+            .contact-box div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            /* Ajuste dos adesivos */
+            .skills-grid {
+                justify-content: center; /* Centraliza adesivos no mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="folder-container">
+        
+        <nav class="tabs-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'inicio')">Início</button>
+            <button class="tab-btn" onclick="openTab(event, 'sobre')">Sobre</button>
+            <button class="tab-btn" onclick="openTab(event, 'experiencia')">Experiência</button>
+            <button class="tab-btn" onclick="openTab(event, 'formacao')">Formação</button>
+            <button class="tab-btn" onclick="openTab(event, 'contato')">Contato</button>
+        </nav>
+
+        <main class="content-area">
+            <div class="tape-deco"></div>
+
+            <div id="inicio" class="tab-content active">
+                <div class="home-grid">
+                    <div class="profile-container">
+                        <div class="profile-frame">
+                            <img src="./WhatsApp Image 2025-11-24 at 13.17.27.jpeg" alt="Anna Flavia">
+                            <div style="text-align: center; font-family: 'Gloria Hallelujah'; color: #555; margin-top: 5px; font-size: 0.8rem;">@AnnaFlavia</div>
+                        </div>
+                    </div>
+                    <div class="intro-text">
+                        <p class="font-hand" style="color: var(--pink-dark); margin-bottom: 5px;">Hi! Welcome to my portfolio.</p>
+                        <h1 class="page-title">Anna<br>Flavia<br>Lippi</h1>
+                        <p>
+                            Auxiliar de Supervisão Administrativa & <br>
+                            Estudante de Recursos Humanos.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="sticker" style="--r: -2deg; background: #333;">Caraguatatuba - SP</span>
+                            <span class="sticker" style="--r: 2deg;">19 Anos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sobre" class="tab-content">
+                <h2 class="section-title">Quem sou eu?</h2>
+                <div class="home-grid" style="grid-template-columns: 1fr; gap: 20px;">
+                    <div>
+                        <p>
+                            Olá! Tenho 19 anos e sou apaixonada por organização e desenvolvimento humano. Me considero uma pessoa muito <strong>esforçada e organizada</strong>, sempre buscando aprender e evoluir.
+                        </p>
+                        <p>
+                            Tenho facilidade em me comunicar, flexibilidade social e adoro trabalhar em equipe. Acredito que um ambiente de trabalho harmonioso é a chave para o sucesso.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 15px; border: 2px dashed #ddd;">
+                        <h3 class="font-hand" style="color: var(--pink-primary); margin-bottom: 20px; text-align: center;">Meus Superpoderes</h3>
+                        <div class="skills-grid">
+                            <span class="sticker" style="--r: -2deg">Esforçada</span>
+                            <span class="sticker" style="--r: 3deg">Organizada</span>
+                            <span class="sticker" style="--r: -1deg">Comunicação</span>
+                            <span class="sticker" style="--r: 2deg">Flexibilidade</span>
+                            <span class="sticker" style="--r: -3deg">Inglês B1</span>
+                            <span class="sticker" style="--r: 1deg">Teamwork</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="experiencia" class="tab-content">
+                <h2 class="section-title">Experiência Profissional</h2>
+                
+                <div class="timeline-item">
+                    <span class="timeline-subtitle">2024 - Atual</span>
+                    <h3 class="timeline-title">AME Caraguatatuba</h3>
+                    <p style="margin-top: 5px; margin-bottom: 10px;">
+                        <strong>Auxiliar de Supervisão Administrativa</strong><br>
+                        <span class="tag">Contrato Jovem Aprendiz</span>
+                    </p>
+                    <p style="font-size: 0.95rem;">
+                        Atuo auxiliando nos processos administrativos, organização de documentos e suporte à supervisão, desenvolvendo habilidades de gestão e rotinas de escritório.
+                    </p>
+                </div>
+            </div>
+
+            <div id="formacao" class="tab-content">
+                <h2 class="section-title">Educação & Cursos</h2>
+                
+                <div class="home-grid" style="align-items: start;">
+                    <div>
+                        <h3 class="font-hand" style="color: var(--pink-dark); margin-bottom: 15px;">Acadêmico</h3>
+                        
+                        <div class="timeline-item">
+                            <span class="tag">Cursando (Noturno)</span>
+                            <h4 class="timeline-title">Técnico em Recursos Humanos</h4>
+                            <span class="timeline-subtitle">ETEC de Caraguatatuba | 2024 - 2025</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <span class="tag" style="background: #cfc;">Concluído</span>
+                            <h4 class="timeline-title">Ensino Médio + Téc. Guia de Turismo</h4>
+                            <span class="timeline-subtitle">NOVOTEC | 2022 - 2024</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <h3 class="font-hand" style="color: var(--pink-dark); margin-bottom: 15px;">Idiomas & Extras</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px;">
+                                
+                                <strong>Inglês Intermediário</strong>
+                                <br><small>Diploma plataforma Speak (2024)</small>
+                            </li>
+                            <li style="margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px;">
+                               
+                                <strong>Inglês Empresarial</strong>
+                                <br><small>Plataforma Speak - Etapa 11</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contato" class="tab-content">
+                <div class="contact-box">
+                    <h2 class="font-bubble" style="font-size: 2rem; margin-bottom: 10px;">Vamos conversar?</h2>
+                    <p class="font-hand">Estou disponível para novas oportunidades!</p>
+                    
+                    <div style="margin-top: 20px; width: 100%;">
+                        <a href="mailto:annaflavialippi@gmail.com" class="btn-contact">
+                            <i class="far fa-envelope"></i> annaflavialippi@gmail.com
+                        </a>
+                        <a href="https://wa.me/5512982769258" class="btn-contact" style="background: #25D366;">
+                            <i class="fab fa-whatsapp"></i> (12) 98276-9258
+                        </a>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
